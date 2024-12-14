@@ -2,7 +2,7 @@ import math
 def calc():
     print("WELCOME TO MY CALCULATOR...")
     print("THE OPERATIONS HERE YOU CAN DO ARE LISTED AS FOLLOWS :-\n 1.ADDITION)\n 2.SUBTRACTION \n 3.MIULTIPLICATION \n 4.DIVISION \n 5.FLOOR DIVISOIN \n.6.REMAINDER DIVISION \n 7.EXPONENTIATION \n 8.SQUARE \n 9.SQUARE ROOT \n 10.HISTORY \n 11.EXIT")
-    his = []
+    
 
     while True:
       try:
@@ -14,9 +14,8 @@ def calc():
 
             if opt ==10:
               try:
-                f = open("history.txt",'rt')
-                print(f.read())
-                f.close()
+                with open("hist.txt",'rt') as f:
+                  print(f.read())
               except FileNotFoundError:
                 print("No history found!.Do some Operations First") 
 
@@ -47,13 +46,13 @@ def calc():
             with open("hist.txt",'at') as f:
               contnt = f"OPERATION : {opt} --> OPERANDS : {a} AND {b} ; RESULT : {result}"
               f.write(contnt)   
-            f.close()
+            
       
           case 8|9:
             a = float(input("ENTER A NUMBER : "))
             b = None
 
-            if opt==8:
+            if opt==9:
               if a>=0:
                 result = math.sqrt(a)
               else:
@@ -61,6 +60,10 @@ def calc():
                 continue
             else:
               result = a**2   
+
+            with open("hist.txt",'at') as f:
+              contnt = f"OPERATION : {opt} --> OPERANDS : {a} AND {b} ; RESULT : {result}"
+              f.write(contnt) 
                 
           case _:
             raise ValueError("INVAILD INPUT")
@@ -71,7 +74,7 @@ def calc():
 
       
 
-      print(result)
+      print("THE RESULT : ",result)
 
 calc()
 
